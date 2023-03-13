@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-image: url("../startup/aqua.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        h1{
+            color: aqua;
+            font-size: 80px;
+            font-weight: bolder;
+            display: flex;
+            justify-content: center;
+            margin-top: 100px;
+        }
+        p{
+            color: rgb(149, 222, 222);
+            font-size: 40px;
+            font-weight: bolder;
+            display: flex;
+            justify-content: center;
+            margin-top: 70px;
+        }
+        form{
+            display: flex;
+            justify-content: center;
+            padding: 180px;
+    
+        }
+        button{
+            width: 250px;
+            display: flex;
+            margin: 33px;
+            height: 60px;
+            border-radius: 25px;
+            border: none;
+            background-color: aqua;
+        }
+        button a{
+            text-decoration: none;
+            color: black;
+            font-size: 25px;
+            font-weight: bolder;
+            padding: 12px 23px 10px 69px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to BeBa</h1>
+    <p>we make your life simple and enjoyable!</p>
+    <form action="/welcome" method="get">
+        <button><a href="./register">Sign in</a></button>
+        <button><a href="#">Login</a></button>
+    </form>
+</body>
+</html>
