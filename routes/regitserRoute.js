@@ -3,6 +3,7 @@ const registerRouter = require('express').Router()
 const Joi = require('@hapi/joi')
 const User = require('../startup/models/user.model')
 const bcrypt = require('bcrypt')
+const _= require('lodash')
 const { Schema } = require('mongoose')
 // const jwt = require('jsonwebtoken')
 // const _= require('lodash')
@@ -47,23 +48,32 @@ const emailExist = await User.findOne({email:req.body.email})
 if(emailExist)  return res.status(400).send("Email already exists")
 
 //hash the passwords
+
+const newUser = new User(_.pick(req.body, ["firstname", "lastname", "username", "email","password"]))
 const salt = await bcrypt.genSalt(10);
 const hashedPassword = await bcrypt.hash(req.body.password,salt)
-const newUser = new User({
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
-          username:req.body.username,
-          email:req.body.email,
-          password:hashedPassword 
-      });
-
-  try{
-         const savedUser = await newUser.save();
-   res.send(savedUser)
-  } catch (err){
-      res.status(400).send(err)
-  }
+newUser.password = hashedPassword
+await newUser.save()
+return res
+    .send(_.pick(newUser, ["firstname", "lastname", "username", "email","password"]))
+    .status(201);
 });
+
+// ({
+//           firstname: req.body.firstname,
+//           lastname: req.body.lastname,
+//           username:req.body.username,
+//           email:req.body.email,
+//           password:hashedPassword 
+//       });
+
+//   try{
+//          const savedUser = await newUser.save();
+//    res.send(savedUser)
+//   } catch (err){
+//       res.status(400).send(err)
+//   }
+// });
 
 
 
